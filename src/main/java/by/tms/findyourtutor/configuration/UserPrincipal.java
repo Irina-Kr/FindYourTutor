@@ -15,7 +15,7 @@ import java.util.Set;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class UserPrincipal implements UserDetails {
+public  class UserPrincipal implements UserDetails {
 
     private String name;
     private String surname;

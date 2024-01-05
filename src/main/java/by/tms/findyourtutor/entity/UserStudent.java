@@ -42,5 +42,6 @@ public class UserStudent extends AbstractEntity {
     @Column(name = "role")
     private Set<Role> roles = new HashSet<>();
 
+
 }
 

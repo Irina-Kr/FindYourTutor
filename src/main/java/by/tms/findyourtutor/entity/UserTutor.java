@@ -45,6 +45,5 @@ public class UserTutor extends AbstractEntity {
     private Set<Role> roles = new HashSet<>();
 
 
-
 }
 
