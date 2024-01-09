@@ -2,6 +2,7 @@ package by.tms.findyourtutor.configuration;
 
 
 import by.tms.findyourtutor.repository.UserRepository;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.domain.Example;
@@ -26,6 +27,9 @@ import java.util.function.Function;
 @NoArgsConstructor
 public    class UserPrincipal implements UserDetails , UserRepository {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String username;
     private String surname;
@@ -52,6 +56,7 @@ public    class UserPrincipal implements UserDetails , UserRepository {
 
     @Override
     public String getUsername(){return username;}
+
 
 
 

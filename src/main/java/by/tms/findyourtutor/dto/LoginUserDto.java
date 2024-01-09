@@ -1,5 +1,6 @@
 package by.tms.findyourtutor.dto;
 
+import by.tms.findyourtutor.configuration.UserPrincipal;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,17 +12,17 @@ import org.hibernate.validator.constraints.Range;
 @Setter
 @ToString
 public class LoginUserDto {
-    private AbstractEntity abstractEntity;
+    private UserPrincipal userPrincipal;
 
     public LoginUserDto(){
 
     }
-    public LoginUserDto(AbstractEntity abstractEntity){
-        this.abstractEntity = abstractEntity;
+    public LoginUserDto(UserPrincipal userPrincipal){
+        this.userPrincipal = userPrincipal;
     }
     @NotEmpty
     @NotBlank
-    Long id = abstractEntity.getId();
+    Long id ;
 
     @NotEmpty
     @NotBlank
