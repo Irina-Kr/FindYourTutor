@@ -1,6 +1,7 @@
 package by.tms.findyourtutor.entity;
 
 
+import by.tms.findyourtutor.configuration.UserPrincipal;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,7 +17,11 @@ import java.util.Set;
 @Table(name = "tb_user")
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserTutor extends AbstractEntity {
+public class UserTutor extends UserPrincipal {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -39,10 +44,7 @@ public class UserTutor extends AbstractEntity {
     @Column(name = "language", nullable = false)
     private String country;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private Set<Role> roles = new HashSet<>();
+
 
 
 }

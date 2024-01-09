@@ -14,6 +14,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfiguration {
@@ -24,19 +26,21 @@ public class SecurityConfiguration {
         MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
         RequestMatcher myMatcher = new AntPathRequestMatcher(H2_URL_PATTERN);
         http
-                .authorizeHttpRequests((requests) -> requests
+                .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/user/registration", "/user/login").permitAll()
-                        .antMatchers("/admin/**").hasRole("ADMIN")
-                        .antMatchers("/student/**").hasRole("STUDENT")
-                        .antMatchers("/tutor/**").hasRole("TUTOR")
+                        .requestMatchers(antMatcher("/admin/**")).hasRole("ADMIN")
+                        .requestMatchers (antMatcher("/student/**")).hasRole("STUDENT")
+                        .requestMatchers (antMatcher("/tutor/**")).hasRole("TUTOR")
                         .anyRequest().authenticated()
-                        .and()
+
                 )
-                .formLogin((form) -> form
+                .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .permitAll()
                 )
-                .logout((logout) -> logout.permitAll())
+                .logout(logout -> logout
+                        .permitAll()
+                )
                 .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).csrf(csrfConfigurer ->
                         csrfConfigurer.ignoringRequestMatchers(myMatcher));

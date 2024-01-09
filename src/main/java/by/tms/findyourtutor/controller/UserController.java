@@ -2,6 +2,7 @@ package by.tms.findyourtutor.controller;
 
 import by.tms.findyourtutor.configuration.JWTTokenProvider;
 import by.tms.findyourtutor.configuration.UserPrincipal;
+import by.tms.findyourtutor.dto.LoginUserDto;
 import by.tms.findyourtutor.entity.Role;
 import by.tms.findyourtutor.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -16,29 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
 
-/*import by.tms.findyourtutor.repository.UserRepository;
-import org.hibernate.mapping.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/user")
-public class UserController {
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @PostMapping
-    public User create(@RequestBody User user) {
-        return userRepository.save(user);
-    }
-
-    @GetMapping
-    public List<User> findAll() {
-       return userRepository.findAll();
-    }
-}*/
 @Slf4j
 @RestController
 @RequiredArgsConstructor

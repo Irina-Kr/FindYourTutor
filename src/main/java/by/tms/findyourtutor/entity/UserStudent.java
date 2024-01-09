@@ -1,12 +1,15 @@
 package by.tms.findyourtutor.entity;
 
+import by.tms.findyourtutor.configuration.UserPrincipal;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.security.core.userdetails.User;
 
 import javax.management.relation.Role;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -14,7 +17,11 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-public class UserStudent extends AbstractEntity {
+public class UserStudent extends UserPrincipal {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "name",nullable = false)
     private String name;
@@ -41,6 +48,12 @@ public class UserStudent extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Set<Role> roles = new HashSet<>();
+
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return Optional.empty();
+    }
 
 
 }

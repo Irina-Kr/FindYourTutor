@@ -22,10 +22,10 @@ public class UserService implements UserDetailsService {
     private  final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     public User save(User user){
-        user.getPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(Role.STUDENT);
-        user.getRoles().add(Role.TUTOR);
-        user.getRoles().add(Role.ADMIN);
+        user.getPassword();
+        user.getAuthorities().add(Role.STUDENT);
+        user.getAuthorities().add(Role.TUTOR);
+        user.getAuthorities().add(Role.ADMIN);
         return userRepository.save(user);
     }
     public Optional<User> findById(Long id) {
@@ -44,7 +44,6 @@ public class UserService implements UserDetailsService {
     }
     public void update(User user) {
         if (user!= null){
-            user.setName("new name");
             userRepository.save(user);
         }
     }
@@ -56,7 +55,6 @@ public class UserService implements UserDetailsService {
         UserPrincipal userPrincipal = UserPrincipal.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
-                .roles(user.getRoles())
                 .build();
 
         return userPrincipal;
@@ -64,7 +62,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void assignRoleToUser(User user, Role role){
-        user.getRoles().add(role);
+        user.getAuthorities().add(role);
 
 
 }
